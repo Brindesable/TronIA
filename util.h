@@ -13,6 +13,7 @@ struct Case
 };
 
 int ** copyMap(int ** map);
+void deleteMap(int ** map);
 void findPlayer(Player & player, int nPlayer, int ** map);
 void afficheMap(int ** map);
 

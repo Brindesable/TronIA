@@ -4,6 +4,8 @@
 #include <iostream>
 using namespace std;
 
+int SELF = 1;
+
 int getCaseOwner(int val)
 {
     if(val < 0)
@@ -63,7 +65,7 @@ bool estEnferme(Player & player, int ** map)
                 trouve = true;
             else if(newMap[y][x+1] == 0)
             {
-                newMap[y][x-1] = 20 + player.n;
+                newMap[y][x+1] = 20 + player.n;
                 enfilerCase(x+1, y, file);
             }
         }
@@ -75,7 +77,7 @@ bool estEnferme(Player & player, int ** map)
         player.cases = nbCases - 1;
 
     player.enferme = !trouve;
-    //afficheMap(newMap);
+    afficheMap(newMap);
     deleteMap(newMap);
 
     return !trouve;
@@ -185,25 +187,25 @@ int evaluateScore(vector<Player> players, int nPlayer, int ** map, Direction dir
 
     player = players.at(nPlayer - 1);
 
-    newMap[player.y][player.x] = idPlayer;
+    switch(dir)
     {
         case TOP :
-            newMap[player.y - 1][player.x] = -idPlayer;
+            newMap[player.y - 1][player.x] = -nPlayer;
             break;
         case BOTTOM :
-            newMap[player.y + 1][player.x] = -idPlayer;
+            newMap[player.y + 1][player.x] = -nPlayer;
             break;
         case LEFT :
-            newMap[player.y][player.x - 1] = -idPlayer;
+            newMap[player.y][player.x - 1] = -nPlayer;
             break;
         case RIGHT :
-            newMap[player.y][player.x + 1] = -idPlayer;
+            newMap[player.y][player.x + 1] = -nPlayer;
             break;
     }
 
     compterTerritoire(players, newMap);
 
-    score = player.score;
+    int score = player.cases;
 
     deleteMap(newMap);
 
@@ -212,7 +214,7 @@ int evaluateScore(vector<Player> players, int nPlayer, int ** map, Direction dir
 
 Direction choisirDir(vector<Player> players, int ** map)
 {
-    player = players.at(SELF - 1);
+    Player player = players.at(SELF - 1);
 
     int maxScore = 0;
     Direction dir;

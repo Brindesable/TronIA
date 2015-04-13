@@ -64,7 +64,7 @@ bool fermetureTest1()
     Player player(2);
     findPlayer(player, player.n, map);
 
-    return (estEnferme(player, map) && player.cases == 55);
+    return (estEnferme(player, map) && player.cases == 2);
 }
 
 bool fermetureTest2()
