@@ -4,8 +4,6 @@
 #define WIDTH 30
 #define HEIGHT 20
 
-int SELF = 1;
-
 struct Player
 {
     int n;
@@ -28,7 +26,7 @@ struct Pos
     int x;
     int y;
 
-    Pos(int nx, ny) : x(nx), y(ny)
+    Pos(int nx, int ny) : x(nx), y(ny)
     {}
 };
 
